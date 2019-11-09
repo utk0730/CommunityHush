@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./src/app.js",
+  entry: "./src/index.js",
   output: {
     path: path.join(__dirname, "public"),
     filename: "bundle.js"
@@ -14,23 +14,20 @@ module.exports = {
         loader: "babel-loader"
       },
       {
-        test: /\.scss$/,
+        test: /\.css|scss$/,
         use: ["style-loader", "css-loader", "sass-loader"]
       },
       {
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              limit: 5000
-            }
-          }
-        ]
+        test: /\.(png|jpg|gif|svg|jpeg)$/,
+        use: ["file-loader"]
       }
     ]
   },
   devServer: {
-    contentBase: path.join(__dirname, "public")
-  }
+    contentBase: path.join(__dirname, "public"),
+    historyApiFallback: true,
+    publicPath: "/",
+    port: 4000
+  },
+  devtool: "cheap-module--eval-source-map"
 };
