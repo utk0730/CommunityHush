@@ -11,7 +11,18 @@ import Header from "./common/Header";
 const Feeds = lazy(() => import("./Feeds"));
 const FeedDetail = lazy(() => import("./FeedDetail"));
 
-const Loading = () => <div>loading.....</div>;
+import Loader from "react-loader-spinner";
+
+const Loading = () => (
+  <Loader
+    className="static left-auto top-auto"
+    visible={true}
+    type="ThreeDots"
+    color="blue"
+    height={100}
+    width={100}
+  />
+);
 
 const RootComponent = () => {
   return (
@@ -21,7 +32,8 @@ const RootComponent = () => {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Feeds} />
-            <Route path="/detail" component={FeedDetail} />
+            <Route path="/feeds" component={Feeds} />
+            <Route path="/:id" component={FeedDetail} />
           </Switch>
         </BrowserRouter>
       </Suspense>

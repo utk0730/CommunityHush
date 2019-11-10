@@ -20,7 +20,7 @@ const Feeds = ({ fecthAllFeeds, allFeeds, loading }) => {
     <AppContainer>
       <FeedsContainer>
         <LeftSidebar />
-        <div className="flex flex-col" style={{ width: "60%" }}>
+        <div className="flex flex-col cursor-pointer" style={{ width: "60%" }}>
           {loading ? (
             <Loader
               className="mx-auto"

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import moment from "moment";
+import { withRouter } from "react-router-dom";
 import {
   FeedWrapper,
   FeedOwnerImg,
@@ -10,8 +11,13 @@ import {
   CompanyTags,
   Tags
 } from "./styled";
-const Feed = ({ feed }) => {
+
+//splitting this component into further components could have been a better idea.
+//time constraint :P
+
+const Feed = ({ feed, history }) => {
   const {
+    id: feedId,
     userName,
     companyName,
     userImage,
@@ -22,7 +28,6 @@ const Feed = ({ feed }) => {
     AviewCount,
     likeCount,
     metaTags,
-    userVerified,
     isAnonymous
   } = feed;
   const [isHelpButtonsVisible, setIsHelpButtonsVisible] = useState(false);
@@ -71,7 +76,11 @@ const Feed = ({ feed }) => {
         ).fromNow()}`}</div>
       </div>
 
-      <ContentWrapper>
+      <ContentWrapper
+        onClick={() => {
+          history.push(`/${feedId}`);
+        }}
+      >
         <h1 className="font-bold text-black text-xl my-2 leading-tight">
           {title}
         </h1>
@@ -161,4 +170,4 @@ const Feed = ({ feed }) => {
   );
 };
 
-export default Feed;
+export default withRouter(Feed);
