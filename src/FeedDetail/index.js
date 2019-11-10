@@ -1,7 +1,7 @@
 import React from "react";
+import AppContainer from "../common/AppContainer/index";
 
 const FeedDetail = () => {
-  return <div>feed details</div>;
-  <div>feed detail</div>;
+  return <AppContainer>feed details</AppContainer>;
 };
 export default FeedDetail;

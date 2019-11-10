@@ -10,18 +10,19 @@ export const Navbar = styled.nav`
 `;
 
 export const Logo = styled.div`
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: bold;
+  width: 15%;
+  color: #364dcb;
 `;
 
+export const ProfileImgWrapper = styled.div``;
 export const ProfileImg = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
 `;
-export const SearchInput = styled.input`
-  width: 40%;
-  padding: 8px;
-  border-radius: 2px;
-  border: 1px solid grey;
+export const SearchInputWrapper = styled.div`
+  width: 50%;
+  margin-right: 20%;
 `;
