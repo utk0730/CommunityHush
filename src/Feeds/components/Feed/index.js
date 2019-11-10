@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import moment from "moment";
 import {
-  Feed,
+  FeedWrapper,
   FeedOwnerImg,
   ContentWrapper,
   IconWrapper,
@@ -9,49 +10,72 @@ import {
   CompanyTags,
   Tags
 } from "./styled";
-import profile from "../../../assets/images/profile.jpg";
-export default function index() {
+const Feed = ({ feed }) => {
+  const {
+    userName,
+    companyName,
+    userImage,
+    title,
+    description,
+    createdDate,
+    commentCount,
+    AviewCount,
+    likeCount,
+    metaTags,
+    userVerified,
+    isAnonymous
+  } = feed;
   const [isHelpButtonsVisible, setIsHelpButtonsVisible] = useState(false);
+
+  // both tags & metatags have relevant data to display question tags, i have chosen metaTags as
+  //tags are missing in few cases unlike metatags
+  const renderTags = () =>
+    metaTags && metaTags.map(({ content }) => <Tags>#{content}</Tags>);
+
+  // couldn't find any data in api to generate these tags so, hardcoded for now
+  const renderCompanyNameTagsWithQuestions = () => (
+    <CompanyTags className="flex items-center mb-2">
+      <IconWrapper className="text-gray-600 text-sm">
+        <i className="far fa-building mr-1"></i>
+        <span>Questions for </span>
+      </IconWrapper>
+      <IconWrapper className="text-gray-600 text-sm">
+        <i className="far fa-building mx-2"></i>
+        <span>Microsoft</span>
+      </IconWrapper>
+      <IconWrapper className="text-gray-600 text-sm">
+        <i className="far fa-building mx-2"></i>
+        <span>Amazon</span>
+      </IconWrapper>
+    </CompanyTags>
+  );
+
   return (
-    <Feed className=" bg-white border p-4 rounded">
-      <CompanyTags className="flex items-center mb-2">
-        <IconWrapper className="text-gray-600 text-sm">
-          <i class="far fa-building mr-1"></i>
-          <span>Questions for </span>
-        </IconWrapper>
-        <IconWrapper className="text-gray-600 text-sm">
-          <i class="far fa-building mx-2"></i>
-          <span>Microsoft</span>
-        </IconWrapper>
-        <IconWrapper className="text-gray-600 text-sm">
-          <i class="far fa-building mx-2"></i>
-          <span>Amazon</span>
-        </IconWrapper>
-      </CompanyTags>
+    <FeedWrapper className=" bg-white border p-4 rounded">
+      {renderCompanyNameTagsWithQuestions()}
       <div className="flex justify-between pt-2">
         <div className="flex">
-          <FeedOwnerImg src={profile} alt="" className="rounded-full" />
+          <FeedOwnerImg src={userImage} alt="" className="rounded-full" />
           <div className="ml-3 leading-none">
-            <h3 className="font-bold text-blue-600 text-lg">Utkarsh Bharti</h3>
-            <p className="text-sm mt-1 text-gray-600">Snapwiz</p>
+            <h3 className="font-bold text-blue-600 text-lg">
+              {userName}
+              {isAnonymous && (
+                <i className="fas fa-check-circle ml-2 text-blue-600"></i>
+              )}
+            </h3>
+            <p className="text-sm mt-1 text-gray-600">{companyName}</p>
           </div>
         </div>
-        <div className="self-end text-xs text-gray-500 ">Asked 3hrs ago</div>
+        <div className="self-end text-xs text-gray-500 ">{`Asked ${moment(
+          createdDate
+        ).fromNow()}`}</div>
       </div>
 
       <ContentWrapper>
         <h1 className="font-bold text-black text-xl my-2 leading-tight">
-          I am not happy with my career growth due to lack of better
-          opportunity?
+          {title}
         </h1>
-        <p className="text-sm text-gray-800 tracking-wide">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo,
-          assumenda? Voluptatum dicta consequatur necessitatibus laboriosam
-          similique recusandae, veniam earum, aut beatae ab fuga quidem
-          molestias in nihil, animi obcaecati iure quisquam dolore deleniti
-          nisi? Dolores facere enim rerum praesentium doloribus. Lorem ipsum
-          dolor sit amet.
-        </p>
+        <p className="text-sm text-gray-800 tracking-wide">{description}</p>
         <p className="text-blue-600 text-sm underline self-end my-1">
           see more
         </p>
@@ -81,7 +105,7 @@ export default function index() {
             <i className="fas fa-share-square ml-4"></i>
           </IconWrapper>
           <IconWrapper>
-            <i class="fas fa-ellipsis-h ml-4"></i>
+            <i className="fas fa-ellipsis-h ml-4"></i>
           </IconWrapper>
         </div>
         {isHelpButtonsVisible && (
@@ -110,23 +134,19 @@ export default function index() {
         )}
       </ActionButtonsWrapper>
       <div className="mt-3 flex justify-between items-center">
-        <div>
-          <Tags>#product</Tags>
-          <Tags>#sass</Tags>
-          <Tags>#b2b</Tags>
-        </div>
+        <div>{renderTags()}</div>
         <div className="flex">
           <IconWrapper className="text-blue-600 flex items-center justify-around mr-2">
             <i className="far fa-thumbs-up bg-blue-200 rounded-full p-1 text-xl mr-1"></i>
-            <span className="text-xs">20</span>
+            <span className="text-xs">{AviewCount}</span>
           </IconWrapper>
           <IconWrapper className="text-red-600 flex items-center justify-around mr-2">
             <i className="far fa-heart bg-red-200 rounded-full p-1 text-xl mr-1"></i>
-            <span className="text-xs">20</span>
+            <span className="text-xs">{likeCount}</span>
           </IconWrapper>
           <IconWrapper className="text-green-600 flex items-center justify-around mr-2">
             <i className="fas fa-sign-language bg-green-200 rounded-full p-1 text-xl mr-1"></i>
-            <span className="text-xs">20</span>
+            <span className="text-xs">{commentCount}</span>
           </IconWrapper>
           <IconWrapper className="text-gray-600 flex items-center justify-around mr-2">
             <i
@@ -137,6 +157,8 @@ export default function index() {
           </IconWrapper>
         </div>
       </div>
-    </Feed>
+    </FeedWrapper>
   );
-}
+};
+
+export default Feed;

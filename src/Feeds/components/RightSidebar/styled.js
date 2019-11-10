@@ -1,5 +1,5 @@
 import styled from "styled-components";
 export const RightSidebar = styled.div`
-  width: 25%;
+  width: 20%;
   height: 60px;
 `;

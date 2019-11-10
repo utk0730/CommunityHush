@@ -1,6 +1,7 @@
 import styled from "styled-components";
-export const Feed = styled.div`
-  width: 55%;
+export const FeedWrapper = styled.div`
+  width: 100%;
+  margin-bottom: 20px;
 `;
 export const FeedOwnerImg = styled.img`
   width: 50px;
