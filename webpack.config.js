@@ -29,5 +29,5 @@ module.exports = {
     publicPath: "/",
     port: 4000
   },
-  devtool: "cheap-module--eval-source-map"
+  devtool: false
 };

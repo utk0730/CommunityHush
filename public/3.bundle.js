@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{120:function(n,e,a){"use strict";var t=a(17).a.div.withConfig({displayName:"AppContainer__Container",componentId:"sc-11shwm8-0"})(["padding:10px 100px;"]);e.a=t},254:function(n,e,a){"use strict";a.r(e);var t=a(0),i=a.n(t),o=a(120);e.default=function(){return i.a.createElement(o.a,null,"feed details")}}}]);
