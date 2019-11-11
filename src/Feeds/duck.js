@@ -24,7 +24,7 @@ const getFeeds = state => {
 };
 const getFeedsSuccess = (state, { payload }) => {
   if (payload) {
-    state.allFeeds.push(...payload);
+    state.allFeeds = [...payload];
     state.loading = false;
   }
 };
