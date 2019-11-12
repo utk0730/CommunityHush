@@ -11,6 +11,9 @@ import {
   CompanyTags,
   Tags
 } from "./styled";
+
+// importing icons/images for app , sttructuring them into a separate file into an object
+// and exporting from there will be a better idea
 import anonymousIcon from "../../../assets/icons/UseranonymousDP.svg";
 import verifiedIcon from "../../../assets/icons/verified-icon.svg";
 import helpfullIcon from "../../../assets/icons/helpfullIcon.svg";
@@ -29,8 +32,7 @@ import superreaction from "../../../assets/icons/superb icn.svg";
 
 //splitting this component into further components could have been a better idea.
 //time constraint :P
-
-const Feed = ({ feed, history }) => {
+const Feed = ({ feed, history, reactToFeed }) => {
   const {
     id: feedId,
     userName,
@@ -68,7 +70,7 @@ const Feed = ({ feed, history }) => {
   );
 
   return (
-    <FeedWrapper className=" bg-white border p-4 rounded">
+    <FeedWrapper className=" bg-white border p-3 rounded">
       {renderCompanyNameTagsWithQuestions()}
       <div className="flex justify-between pt-2">
         <div className="flex">
@@ -108,7 +110,7 @@ const Feed = ({ feed, history }) => {
       <ActionButtonsWrapper className="flex flex-row justify-between items-center mt-4 border-b-2 pb-3 relative">
         <div className="flex flex-row">
           <IconWrapper
-            className="text-green-600 mr-4 flex"
+            className="text-green-600 mr-2 flex"
             onClick={() => setIsHelpButtonsVisible(!isHelpButtonsVisible)}
           >
             <img src={helpfullIcon} alt="" className="mr-2" />
@@ -139,13 +141,22 @@ const Feed = ({ feed, history }) => {
             show={isHelpButtonsVisible}
           >
             <div className="flex">
-              <IconWrapper className="text-blue-600 flex items-center justify-around mr-2">
+              <IconWrapper
+                className="text-blue-600 flex items-center justify-around mr-2"
+                onClick={() => reactToFeed({ feedId, type_reaction: "like" })}
+              >
                 <img src={likereaction} alt="" className="ml-3" />
               </IconWrapper>
-              <IconWrapper className="text-red-600 flex items-center justify-around mr-2">
+              <IconWrapper
+                className="text-red-600 flex items-center justify-around mr-2"
+                onClick={() => reactToFeed({ feedId, type_reaction: "heart" })}
+              >
                 <img src={heartreaction} alt="" className="ml-3" />
               </IconWrapper>
-              <IconWrapper className="text-green-600 flex items-center justify-around mr-2">
+              <IconWrapper
+                className="text-green-600 flex items-center justify-around mr-2"
+                onClick={() => reactToFeed({ feedId, type_reaction: "clap" })}
+              >
                 <img src={clapreaction} alt="" className="ml-3" />
               </IconWrapper>
               <IconWrapper className="text-green-600 flex items-center justify-around mr-2">

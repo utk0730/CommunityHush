@@ -7,15 +7,19 @@ import RightSidebar from "../Feeds/components/RightSidebar";
 import { FeedsContainer, StyledDiv } from "./styled";
 import Loader from "react-loader-spinner";
 
-import { getFeedsAction } from "./duck";
-const Feeds = ({ fecthAllFeeds, allFeeds, loading }) => {
+import { getFeedsAction, feedReactiosnAction } from "./duck";
+
+const Feeds = ({ fecthAllFeeds, allFeeds, loading, reactToFeed }) => {
   useEffect(() => {
     fecthAllFeeds();
   }, []);
 
   const renderFeeds = () => {
-    return allFeeds.map(feed => <Feed key={feed.id} feed={feed} />);
+    return allFeeds.map(feed => (
+      <Feed key={feed.id} feed={feed} reactToFeed={reactToFeed} />
+    ));
   };
+
   return (
     <AppContainer>
       <FeedsContainer>
@@ -50,6 +54,7 @@ export default connect(
     loading: state.feedsReducer.loading
   }),
   {
-    fecthAllFeeds: getFeedsAction
+    fecthAllFeeds: getFeedsAction,
+    reactToFeed: feedReactiosnAction
   }
 )(Feeds);
