@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import moment from "moment";
 import { withRouter } from "react-router-dom";
 import {
@@ -48,7 +48,23 @@ const Feed = ({ feed, history, reactToFeed }) => {
     isAnonymous,
     userVerified
   } = feed;
+  const node = useRef();
   const [isHelpButtonsVisible, setIsHelpButtonsVisible] = useState(false);
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClick);
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, []);
+
+  //logic to close to reaction buttons overlay
+  const handleClick = e => {
+    if (node.current.contains(e.target)) {
+      // inside click
+      return;
+    }
+    setIsHelpButtonsVisible(false); // outside click
+  };
 
   // both tags & metatags have relevant data to display question tags, i have chosen metaTags as
   //tags are missing in few cases unlike metatags
@@ -107,7 +123,10 @@ const Feed = ({ feed, history, reactToFeed }) => {
           see more
         </p>
       </ContentWrapper>
-      <ActionButtonsWrapper className="flex flex-row justify-between items-center mt-4 border-b-2 pb-3 relative">
+      <ActionButtonsWrapper
+        ref={node}
+        className="flex flex-row justify-between items-center mt-4 border-b-2 pb-3 relative"
+      >
         <div className="flex flex-row">
           <IconWrapper
             className="text-green-600 mr-2 flex"
