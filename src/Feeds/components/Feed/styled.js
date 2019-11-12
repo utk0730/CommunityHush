@@ -2,6 +2,9 @@ import styled from "styled-components";
 export const FeedWrapper = styled.div`
   width: 100%;
   margin-bottom: 20px;
+  @media (max-width: 1024px) {
+    margin-bottom: 5px;
+  }
 `;
 export const FeedOwnerImg = styled.img`
   width: 50px;
@@ -26,7 +29,7 @@ export const ActionButtonsWrapper = styled.div``;
 export const ActionButtonHover = styled.div`
   display: ${props => (props.show ? "block" : "none")};
   position: absolute;
-  top: -40px;
+  top: -50px;
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24);
   transition: all ease-in-out 0.5s;
 `;

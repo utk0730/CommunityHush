@@ -4,7 +4,7 @@ import AppContainer from "../common/AppContainer/index";
 import LeftSidebar from "../Feeds/components/LeftSidebar";
 import Feed from "../Feeds/components/Feed";
 import RightSidebar from "../Feeds/components/RightSidebar";
-import { FeedsContainer } from "./styled";
+import { FeedsContainer, StyledDiv } from "./styled";
 import Loader from "react-loader-spinner";
 
 import { getFeedsAction } from "./duck";
@@ -20,7 +20,7 @@ const Feeds = ({ fecthAllFeeds, allFeeds, loading }) => {
     <AppContainer>
       <FeedsContainer>
         <LeftSidebar />
-        <div className="flex flex-col cursor-pointer" style={{ width: "60%" }}>
+        <StyledDiv>
           {loading ? (
             <Loader
               className="mx-auto"
@@ -37,7 +37,7 @@ const Feeds = ({ fecthAllFeeds, allFeeds, loading }) => {
               no feeds to display
             </div>
           )}
-        </div>
+        </StyledDiv>
 
         <RightSidebar />
       </FeedsContainer>

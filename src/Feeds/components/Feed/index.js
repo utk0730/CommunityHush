@@ -11,6 +11,21 @@ import {
   CompanyTags,
   Tags
 } from "./styled";
+import anonymousIcon from "../../../assets/icons/UseranonymousDP.svg";
+import verifiedIcon from "../../../assets/icons/verified-icon.svg";
+import helpfullIcon from "../../../assets/icons/helpfullIcon.svg";
+import microsoft from "../../../assets/images/microsoft.png";
+import fblogo from "../../../assets/icons/fb icon.svg";
+import tlogo from "../../../assets/icons/twitter icn.svg";
+import linlogo from "../../../assets/icons/share icn.svg";
+import likecount from "../../../assets/icons/like count icn.svg";
+import likereaction from "../../../assets/icons/like reaction icn.svg";
+import heartcount from "../../../assets/icons/heart count.svg";
+import heartreaction from "../../../assets/icons/heart reaction icn.svg";
+import clapcount from "../../../assets/icons/clap count.svg";
+import clapreaction from "../../../assets/icons/Clap reaction icn.svg";
+import dislikereaction from "../../../assets/icons/dislike reaction icn.svg";
+import superreaction from "../../../assets/icons/superb icn.svg";
 
 //splitting this component into further components could have been a better idea.
 //time constraint :P
@@ -28,7 +43,8 @@ const Feed = ({ feed, history }) => {
     AviewCount,
     likeCount,
     metaTags,
-    isAnonymous
+    isAnonymous,
+    userVerified
   } = feed;
   const [isHelpButtonsVisible, setIsHelpButtonsVisible] = useState(false);
 
@@ -42,15 +58,11 @@ const Feed = ({ feed, history }) => {
     <CompanyTags className="flex items-center mb-2">
       <IconWrapper className="text-gray-600 text-sm">
         <i className="far fa-building mr-1"></i>
-        <span>Questions for </span>
+        <span>Questions for</span>
       </IconWrapper>
-      <IconWrapper className="text-gray-600 text-sm">
-        <i className="far fa-building mx-2"></i>
-        <span>Microsoft</span>
-      </IconWrapper>
-      <IconWrapper className="text-gray-600 text-sm">
-        <i className="far fa-building mx-2"></i>
-        <span>Amazon</span>
+      <IconWrapper className="text-gray-600 text-sm flex">
+        <img src={microsoft} className="ml-2 w-4 h-4" alt="" />
+        <span className="mx-1">Microsoft</span>
       </IconWrapper>
     </CompanyTags>
   );
@@ -60,12 +72,16 @@ const Feed = ({ feed, history }) => {
       {renderCompanyNameTagsWithQuestions()}
       <div className="flex justify-between pt-2">
         <div className="flex">
-          <FeedOwnerImg src={userImage} alt="" className="rounded-full" />
+          <FeedOwnerImg
+            src={isAnonymous ? anonymousIcon : userImage}
+            alt=""
+            className="rounded-full"
+          />
           <div className="ml-3 leading-none">
-            <h3 className="font-bold text-blue-600 text-lg">
+            <h3 className="font-semibold text-black-600 text-sm">
               {userName}
-              {isAnonymous && (
-                <i className="fas fa-check-circle ml-2 text-blue-600"></i>
+              {userVerified && (
+                <img src={verifiedIcon} className="float-right ml-2" alt="" />
               )}
             </h3>
             <p className="text-sm mt-1 text-gray-600">{companyName}</p>
@@ -92,10 +108,10 @@ const Feed = ({ feed, history }) => {
       <ActionButtonsWrapper className="flex flex-row justify-between items-center mt-4 border-b-2 pb-3 relative">
         <div className="flex flex-row">
           <IconWrapper
-            className="text-green-600 mr-4"
+            className="text-green-600 mr-4 flex"
             onClick={() => setIsHelpButtonsVisible(!isHelpButtonsVisible)}
           >
-            <i className="fas fa-plus-square mr-2"></i>
+            <img src={helpfullIcon} alt="" className="mr-2" />
             <span className="text-sm">Helpful</span>
           </IconWrapper>
           <IconWrapper className="text-blue-600 mr-4">
@@ -105,16 +121,16 @@ const Feed = ({ feed, history }) => {
         </div>
         <div className="flex flex-row text-gray-600 text-xl items-center">
           <IconWrapper>
-            <i className="fab fa-facebook-square "></i>
+            <img src={fblogo} alt="" />
           </IconWrapper>
           <IconWrapper>
-            <i className="fab fa-twitter ml-4"></i>
+            <img src={tlogo} alt="" className="ml-3" />
           </IconWrapper>
           <IconWrapper>
-            <i className="fas fa-share-square ml-4"></i>
+            <img src={linlogo} alt="" className="ml-3" />
           </IconWrapper>
           <IconWrapper>
-            <i className="fas fa-ellipsis-h ml-4"></i>
+            <i className="fas fa-ellipsis-h ml-3"></i>
           </IconWrapper>
         </div>
         {isHelpButtonsVisible && (
@@ -124,19 +140,19 @@ const Feed = ({ feed, history }) => {
           >
             <div className="flex">
               <IconWrapper className="text-blue-600 flex items-center justify-around mr-2">
-                <i className="far fa-thumbs-up bg-blue-200 rounded-full p-1 text-xl mr-1"></i>
+                <img src={likereaction} alt="" className="ml-3" />
               </IconWrapper>
               <IconWrapper className="text-red-600 flex items-center justify-around mr-2">
-                <i className="far fa-heart bg-red-200 rounded-full p-1 text-xl mr-1"></i>
+                <img src={heartreaction} alt="" className="ml-3" />
               </IconWrapper>
               <IconWrapper className="text-green-600 flex items-center justify-around mr-2">
-                <i className="fas fa-sign-language bg-green-200 rounded-full p-1 text-xl mr-1"></i>
+                <img src={clapreaction} alt="" className="ml-3" />
               </IconWrapper>
               <IconWrapper className="text-green-600 flex items-center justify-around mr-2">
-                <i className="far fa-hand-point-up bg-green-200 rounded-full p-1 text-xl mr-1"></i>
+                <img src={superreaction} alt="" className="ml-3" />
               </IconWrapper>
               <IconWrapper className="text-green-600 flex items-center justify-around mr-2">
-                <i className="fas fa-thumbs-down bg-green-200 rounded-full p-1 text-xl"></i>
+                <img src={dislikereaction} alt="" className="ml-3" />
               </IconWrapper>
             </div>
           </ActionButtonHover>
@@ -146,15 +162,15 @@ const Feed = ({ feed, history }) => {
         <div>{renderTags()}</div>
         <div className="flex">
           <IconWrapper className="text-blue-600 flex items-center justify-around mr-2">
-            <i className="far fa-thumbs-up bg-blue-200 rounded-full p-1 text-xl mr-1"></i>
+            <img src={likecount} alt="" />
             <span className="text-xs">{AviewCount}</span>
           </IconWrapper>
           <IconWrapper className="text-red-600 flex items-center justify-around mr-2">
-            <i className="far fa-heart bg-red-200 rounded-full p-1 text-xl mr-1"></i>
+            <img src={heartcount} alt="" />
             <span className="text-xs">{likeCount}</span>
           </IconWrapper>
           <IconWrapper className="text-green-600 flex items-center justify-around mr-2">
-            <i className="fas fa-sign-language bg-green-200 rounded-full p-1 text-xl mr-1"></i>
+            <img src={clapcount} alt="" />
             <span className="text-xs">{commentCount}</span>
           </IconWrapper>
           <IconWrapper className="text-gray-600 flex items-center justify-around mr-2">

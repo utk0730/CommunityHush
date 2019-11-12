@@ -1,5 +1,4 @@
 import React from "react";
-import profile from "../../assets/images/profile.jpg";
 import {
   Navbar,
   Logo,
@@ -7,11 +6,17 @@ import {
   ProfileImgWrapper,
   ProfileImg
 } from "./styled";
+import brandlogo from "../../assets/images/hushlogo.png";
+import brandtext from "../../assets/images/hushtext.png";
+import profile from "../../assets/images/profile.png";
 
 const Header = () => {
   return (
     <Navbar>
-      <Logo>Hush</Logo>
+      <Logo className="flex items-center">
+        <img className="h-10 w-10 mr-2" src={brandlogo} alt="" />
+        <img className="h-6" src={brandtext} alt="" />
+      </Logo>
       <SearchInputWrapper>
         <input
           placeholder="search"

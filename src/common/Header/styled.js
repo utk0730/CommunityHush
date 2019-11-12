@@ -7,6 +7,12 @@ export const Navbar = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  @media (max-width: 1024px) {
+    padding: 10px 20px;
+    height: 110px;
+    align-items: flex-start;
+  }
 `;
 
 export const Logo = styled.div`
@@ -25,4 +31,10 @@ export const ProfileImg = styled.img`
 export const SearchInputWrapper = styled.div`
   width: 50%;
   margin-right: 20%;
+  @media (max-width: 1024px) {
+    position: absolute;
+    top: 60px;
+    width: 90%;
+    margin: auto;
+  }
 `;
